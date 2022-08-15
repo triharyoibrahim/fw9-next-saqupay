@@ -1,8 +1,8 @@
 import axios from "axios";
-import Cookie from "js-cookies"
+import Cookie from "js-cookie"
 
 const axiosApiIntances = axios.create({
-    baseURL: 'https://fazzpay.herokuapp.com/'
+    baseURL: 'https://fazzpay.herokuapp.com'
 })
 
 // Add a request interceptor
@@ -31,7 +31,7 @@ axiosApiIntances.interceptors.response.use(function (response) {
     console.log(error.response)
     if (error.response.status === 403) {
         Cookie.remove("token");
-        window.location.href = "/auth/login" // sesuaikan path login
+        window.location.href = "/auth/login" 
     }
     // =======
     return Promise.reject(error);

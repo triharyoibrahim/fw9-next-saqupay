@@ -72,8 +72,20 @@ import { Button, Carousel } from "react-bootstrap";
 import Head from "next/head"
 import Image from "next/image"
 import { FiLock, FiPhone, FiDownload } from "react-icons/fi";
+import { useRouter } from "next/router";
 
 function Home() {
+  const router = useRouter();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    router.push("/auth/login");
+  };
+
+  const handleRegis = (e) => {
+    e.preventDefault();
+    router.push("/auth/register");
+  };
     return (
 <>
 <Head><title>Welcome To Saqu Pay</title></Head>
@@ -84,10 +96,10 @@ function Home() {
           </div>
           <div className="p-2">
        
-              <Button variant="success" >Login</Button>
+              <Button variant="success" onClick={handleLogin}>Login</Button>
        
        
-              <Button variant="success">Sign Up</Button>{" "}
+              <Button variant="success" onClick={handleRegis}>Sign Up</Button>{" "}
        
           </div>
         </nav>
@@ -107,7 +119,7 @@ function Home() {
             <div className="p-3">
 
                 {" "}
-                <Button variant="success">Try it free</Button>
+                <Button variant="success" onClick={handleRegis}>Try it free</Button>
 
             </div>
             <p>available On :</p>

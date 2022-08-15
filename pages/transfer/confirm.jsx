@@ -21,7 +21,7 @@ function Confirm() {
             <Menu />
           </Col>
 
-          <Col xs={9}>
+          <Col xs={9} className="graphic">
           <div className="d-flex-column px-3 px-md-4 pt-3 pt-md-4">
               <p>Details</p>
               <div className="graphic d-flex-column p-1 my-2">

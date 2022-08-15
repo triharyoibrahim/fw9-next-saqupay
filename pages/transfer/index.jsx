@@ -24,9 +24,9 @@ function Transfer() {
               <p>Search Receiver</p>
               <Form>
                 <Form.Group className="d-flex mt-4">
-                  <span className=" rounded-start">
+                  <span className=" rounded-start input-group-text zw-icon ">
                     {" "}
-                    <FiSearch className="ms-2" />{" "}
+                    <FiSearch className="ms-2 " />{" "}
                   </span>
                   <Form.Control
                     className="rounded-end"
