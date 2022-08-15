@@ -27,7 +27,7 @@ function PinConfirm(props) {
                 maxlength="1"
                 min="0"
                 max="9"
-                className=""
+                className="pin_input"
                 type="number"
               />
             </div>
@@ -36,7 +36,7 @@ function PinConfirm(props) {
                 maxlength="1"
                 min="0"
                 max="9"
-                className=""
+                className="pin_input"
                 type="number"
               />
             </div>
@@ -45,7 +45,7 @@ function PinConfirm(props) {
                 maxlength="1"
                 min="0"
                 max="9"
-                className=""
+                className="pin_input"
                 type="number"
               />
             </div>
@@ -54,7 +54,7 @@ function PinConfirm(props) {
                 maxlength="1"
                 min="0"
                 max="9"
-                className=""
+                className="pin_input"
                 type="number"
               />
             </div>
@@ -63,7 +63,7 @@ function PinConfirm(props) {
                 maxlength="1"
                 min="0"
                 max="9"
-                className=""
+                className="pin_input"
                 type="number"
               />
             </div>
@@ -72,7 +72,7 @@ function PinConfirm(props) {
                 maxlength="1"
                 min="0"
                 max="9"
-                className=""
+                className="pin_input"
                 type="number"
               />
             </div>
