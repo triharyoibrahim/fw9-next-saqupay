@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { Button, Container, Row, Col } from "react-bootstrap";
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
@@ -7,13 +7,30 @@ import { FiArrowDown, FiArrowUp, FiPlus } from "react-icons/fi";
 import  Head from "next/head"
 import { useRouter } from "next/router";
 import TopUp from "../../topup"
+import Image from "next/image";
+import Cookies from 'js-cookie';
+import axios from "../../../helpers/axios"
 
 function Home() {
 
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow, setModalShow] = useState(false);
   const router = useRouter();
+  const [data, setData] =  useState([]);
 
+  useEffect(() => {
+    getDataUser();
+  }, []);
 
+  const getDataUser = async () => {
+    try {
+      const user = Cookies.get('id');
+      const result = await axios.get(`user/profile/${user}`);
+      setData(result.data.data);
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleTransfer = (e) => {
     e.preventDefault();
     router.push("/transfer/");
@@ -35,8 +52,8 @@ function Home() {
               <div className="d-flex justify-content-between zw-header mt-3">
                 <div className="">
                   <p>Balance</p>
-                  <h3>Rp. 120.000</h3>
-                  <p>081232124323</p>
+                  <h3 className="">Rp. {data.balance}</h3>
+                  <p>{data.noTelp}</p>
                 </div>
                 <div className="d-flex flex-column mt-2">
                   <Button variant="light" onClick={handleTransfer}>
@@ -65,9 +82,15 @@ function Home() {
                         <p className="">Expense</p>
                         <p className="">Rp1.560.000</p>
                       </div>
+                      
                     </div>
                     <div className="d-flex justify-content-center">
-                 
+                    <Image
+                      src="/graphic.png"
+                      width={300}
+                      height={400}
+                      className=""
+                    />
                     </div>
                   </div>
                 </Col>

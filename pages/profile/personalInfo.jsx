@@ -1,13 +1,33 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import Head from "next/head"
 import { Button, Container, Row, Col } from "react-bootstrap";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Menu from "../../components/Menu";
 import { useRouter } from "next/router";
+import Image from "next/image";
+import Cookies from "js-cookie";
+import axios from "../../helpers/axios";
 
 function personalInfo() {
   const router = useRouter()
+  const [data, setData] =  useState([]);
+
+  useEffect(() => {
+    getDataUser();
+  }, []);
+
+  const getDataUser = async () => {
+    try {
+      const user = Cookies.get('id');
+      const result = await axios.get(`user/profile/${user}`);
+      setData(result.data.data);
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   const handleManagePhone = (e) => {
     e.preventDefault();
@@ -39,7 +59,7 @@ function personalInfo() {
                   <div className="d-flex">
                     <div className="d-flex-column justify-content-center ms-1">
                       <p className=" mb-2">First Name</p>
-                      <p className="">Robert</p>
+                      <p className="">{data.firstName}</p>
                     </div>
                   </div>
                 </div>
@@ -49,7 +69,7 @@ function personalInfo() {
                   <div className="d-flex">
                     <div className="d-flex-column justify-content-center ms-1">
                       <p className=" mb-2">Last Name</p>
-                      <p className="">Chandler</p>
+                      <p className="">{data.lastName}</p>
                     </div>
                   </div>
                 </div>
@@ -59,7 +79,7 @@ function personalInfo() {
                   <div className="d-flex">
                     <div className="d-flex-column justify-content-center ms-1">
                       <p className="">Verified E-mail</p>
-                      <p className="">pewdiepie1@gmail.com</p>
+                      <p className="">{data.email}</p>
                     </div>
                   </div>
                 </div>
@@ -69,7 +89,7 @@ function personalInfo() {
                   <div className="d-flex">
                     <div className="d-flex-column justify-content-center ms-1">
                       <p className="mb-2">Phone Number</p>
-                      <p className="">+62 813-9387-7946</p>
+                      <p className="">{data.noTelp}</p>
                     </div>
                   </div>
                  

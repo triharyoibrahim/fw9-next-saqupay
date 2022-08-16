@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import Head from "next/head"
 import { Form, Container, Row, Col } from "react-bootstrap";
 import Navbar from "../../components/Navbar";
@@ -6,9 +6,29 @@ import Footer from "../../components/Footer";
 import Menu from "../../components/Menu";
 import { FiSearch} from "react-icons/fi";
 import { useRouter } from "next/router";
+import Image from "next/image";
+import Cookies from "js-cookie";
+import axios from "../../helpers/axios";
+
 
 function Transfer() {
   const router = useRouter()
+  const [data, setData] =  useState([]);
+
+  useEffect(() => {
+    getDataUser();
+  }, []);
+
+  const getDataUser = async () => {
+    try {
+
+      const result = await axios.get("/user");
+      setData(result.data.data);
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleTransferInput = (e) => {
     e.preventDefault();
@@ -17,10 +37,12 @@ function Transfer() {
 
   return (
     <>
+     
     <Head><title>Search Receiver</title></Head>
     <Navbar />
     <div className="P-2">-</div>
     <main>
+    {data.map(data =>
       <Container>
         <Row>
           <Col xs={3}>
@@ -48,9 +70,9 @@ function Transfer() {
                   <div className="graphic p-2 d-flex ">
                  
                     <div className="d-flex-column justify-content-center ms-3">
-                      <p className="">Robert Suhi</p>
-                      <p className="">+62 813-8492-9994</p>
-                    </div>
+                      <p className="">{data.firstName}</p>
+                      <p className="">{data.noTelp}</p>
+                    </div> 
                   </div>
                
               </div>
@@ -59,8 +81,8 @@ function Transfer() {
                   <div className="graphic p-2 d-flex">
                
                     <div className="d-flex-column justify-content-center ms-3">
-                      <p className="">Jessica Taro</p>
-                      <p className="">+62 812-4343-6731</p>
+                    <p className="">{data.firstName}</p>
+                      <p className="">{data.noTelp}</p>
                     </div>
                   </div>
                
@@ -93,6 +115,7 @@ function Transfer() {
           </Col>
         </Row>
       </Container>
+    )}
     </main>
     <Footer />
   </>

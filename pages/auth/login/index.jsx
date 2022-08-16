@@ -23,8 +23,8 @@ function Login() {
       const result = await axios.post("/auth/login", form);
       console.log(result)
       Cookies.set("token", result.data.data.token);
-      Cookies.set("token", result.data.data.id);
-      router.push("/main/home");
+      Cookies.set("id", result.data.data.id);
+     
         if (result.data.data.pin === null) {
           router.push("/auth/pin");
         } else {
