@@ -5,14 +5,14 @@ import "../styles/landingpage-v2.css";
 
 import "bootstrap/dist/css/bootstrap.css"
 
-// import {Provider} from "react-redux"
-// import {store} from "../stores"
+import {Provider} from "react-redux"
+import {store} from "../stores"
 
 function MyApp({ Component, pageProps }) {
   return (
-    // <Provider store={store}>
+    <Provider store={store}>
       <Component {...pageProps} />
-    // </Provider>
+     </Provider>
   )
 }
 

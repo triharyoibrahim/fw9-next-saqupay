@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosApiIntances = axios.create({
-    baseURL: 'https://fazzpay.herokuapp.com/'
+    baseURL: process.env.URL_BACKEND
 })
 
 export default axiosApiIntances

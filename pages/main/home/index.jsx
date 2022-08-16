@@ -5,8 +5,20 @@ import Footer from "../../../components/Footer";
 import Menu from "../../../components/Menu";
 import { FiArrowDown, FiArrowUp, FiPlus } from "react-icons/fi";
 import  Head from "next/head"
+import { useRouter } from "next/router";
+import TopUp from "../../topup"
 
 function Home() {
+
+  const [modalShow, setModalShow] = React.useState(false);
+  const router = useRouter();
+
+
+  const handleTransfer = (e) => {
+    e.preventDefault();
+    router.push("/transfer/");
+  };  
+  
   return (
     <>
     <Head><title>Home</title></Head>
@@ -27,12 +39,16 @@ function Home() {
                   <p>081232124323</p>
                 </div>
                 <div className="d-flex flex-column mt-2">
-                  <Button variant="light">
+                  <Button variant="light" onClick={handleTransfer}>
                     <FiArrowUp /> Transfer
                   </Button>{" "}
-                  <Button variant="light" className="mt-2">
-                    <FiPlus /> Top Up
-                  </Button>{" "}
+                  <Button variant="light" className="mt-2" onClick={() => setModalShow(true)}>
+                  <FiPlus /> Toptop
+                </Button>
+                <TopUp
+                  show={modalShow}
+                  onHide={() => setModalShow(false)}
+                />
                 </div>
               </div>
               <Row>

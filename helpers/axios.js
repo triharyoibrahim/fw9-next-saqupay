@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookie from "js-cookie"
 
 const axiosApiIntances = axios.create({
-    baseURL: 'https://fazzpay.herokuapp.com'
+    baseURL: process.env.URL_BACKEND
 })
 
 // Add a request interceptor

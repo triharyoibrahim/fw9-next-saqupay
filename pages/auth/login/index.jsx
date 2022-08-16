@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import LeftSide from "../../../components/AuthLeftSide";
 import Head from "next/head"
 import axios from "../../../helpers/axios"
-
 import Cookies from "js-cookie";
 
 function Login() {
@@ -18,24 +17,26 @@ function Login() {
   };
 
   const handleLogin = async (e) => {
+    
     try {
       e.preventDefault();
       const result = await axios.post("/auth/login", form);
-      console.log(result);
+      console.log(result)
       Cookies.set("token", result.data.data.token);
-      Cookies.set("id", result.data.data.id);
-      await dispatch(getUserById(result.data.data.id));
-      if (result.data.data.pin === null) {
-        router.push("/auth/pin");
-      } else {
-        router.push("/main/home");
-      }
+      Cookies.set("token", result.data.data.id);
+      router.push("/main/home");
+        if (result.data.data.pin === null) {
+          router.push("/auth/pin");
+        } else {
+          router.push("/main/home");
+        }
       setIsError(false);
     } catch (error) {
-      console.log(error.response)
+      console.log(error.response);
       setIsError(true);
     }
   };
+
   const handleReset = (e) => {
     e.preventDefault();
     router.push("/auth/reset");
@@ -62,19 +63,19 @@ function Login() {
               wherever you are. Desktop, laptop, mobile phone? we cover all of
               that for you!
             </p>
-            <div className="input-group flex-nowrap  mt-5">
+          <div className="input-group flex-nowrap  mt-5">
               <span className="input-group-text zw-icon ">
                 <FiMail />
               </span>
-  <input
-        type="email"
-        className="form-control zw-input"
-        name="email"
-        placeholder="Enter your email"
-        onChange={handleChangeText}
-      />
+              <input
+                type="email"
+                className="form-control zw-input"
+                name="email"
+                placeholder="Enter your email"
+                onChange={handleChangeText}
+              />
                
-             </div>
+          </div>
 
              <div className="input-group flex-nowrap mt-5">
                <span className="input-group-text zw-icon">

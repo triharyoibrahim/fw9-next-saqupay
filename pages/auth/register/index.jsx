@@ -1,10 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
+import Image from "next/image";
+import { useRouter } from "next/router";
 import { Button } from "react-bootstrap";
 import { FiMail, FiLock, FiUser } from "react-icons/fi";
 import LeftSide from "../../../components/AuthLeftSide";
 import Head from "next/head"
+import axios from "../../../helpers/axios"
 
 function Register() {
+  const [form, setForm] = useState({ firstName: "", lastName: "", email: "", password: "" });
+  const [isError, setIsError] = useState(false);
+  const router = useRouter();
+
+  
+  const handleChangeText = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleRegister = async (e) => {
+    
+    try {
+      e.preventDefault();
+      const result = await axios.post("/auth/register", form);
+      console.log(result)
+      alert("REGRISTRATION SUCCESS, PLEASE CHECK YOUR EMAIL");
+      
+      router.push("/auth/login");
+      setIsError(false);
+    } catch (error) {
+      console.log(error.response);
+      setIsError(true);
+    }
+  };
+
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    router.push("/auth/login");
+  };
   return (    <>
     <Head><title>Register</title></Head>
     <div className="parent-s ">
@@ -29,10 +62,23 @@ function Register() {
               <input
                 type="text"
                 className="form-control zw-input"
-                placeholder="Enter your username"
+                placeholder="Enter your first name"
+                name="firstName"
+                onChange={handleChangeText}
               />
             </div>
             <div className="input-group flex-nowrap  mt-5">
+              <span className="input-group-text zw-icon ">
+                <FiUser />
+              </span>
+              <input
+                type="email"
+                className="form-control zw-input"
+                placeholder="Enter your last name"
+                name="lastName"
+                onChange={handleChangeText}
+              />
+            </div>            <div className="input-group flex-nowrap  mt-5">
               <span className="input-group-text zw-icon ">
                 <FiMail />
               </span>
@@ -40,6 +86,8 @@ function Register() {
                 type="email"
                 className="form-control zw-input"
                 placeholder="Enter your email"
+                name="email"
+                onChange={handleChangeText}
               />
             </div>
 
@@ -51,18 +99,22 @@ function Register() {
                 type="password"
                 className="form-control zw-input"
                 placeholder="Enter your password"
+                name="password"
+                onChange={handleChangeText}
               />
             </div>
           </div>
           <div className="d-grid mt-5">
-            <Button variant="outline-success" size="lg">
+            <Button variant="outline-success" size="lg" onClick={handleRegister}>
               Sign Up
             </Button>
             <p className="text-center p-5">
               Already have an account?{" "}
 
 
-                Login
+              <button className="zwlink menu_button" onClick={handleLogin}>
+              Login
+            </button>
 
             </p>
           </div>
