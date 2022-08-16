@@ -4,9 +4,16 @@ import { Button, Container, Row, Col } from "react-bootstrap";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Menu from "../../components/Menu";
-
+import { useRouter } from "next/router";
 
 function personalInfo() {
+  const router = useRouter()
+
+  const handleManagePhone = (e) => {
+    e.preventDefault();
+    router.push("/profile/managePhone");
+  };  
+
   return (
     <>
     <Head><title>Personal Information</title></Head>
@@ -66,7 +73,7 @@ function personalInfo() {
                     </div>
                   </div>
                  
-                    <p className="p-3">Manage</p>
+                    <p className="p-3 zwlink" onClick={handleManagePhone}>Manage</p>
                  
                 </div>
               </div>

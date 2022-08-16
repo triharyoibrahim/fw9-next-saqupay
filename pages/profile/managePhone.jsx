@@ -5,9 +5,15 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Menu from "../../components/Menu";
 import { FiTrash} from "react-icons/fi";
-
+import { useRouter } from "next/router";
 
 function managePhone() {
+  const router = useRouter()
+
+  const handleAddPhone = (e) => {
+    e.preventDefault();
+    router.push("/profile/addPhone");
+  };
   return (
     <>
     <Head><title>Manage Phone Number</title></Head>
@@ -36,7 +42,7 @@ function managePhone() {
                     </div>
                   </div>
 
-                    <FiTrash />
+                    <FiTrash className="zwlink" onClick={handleAddPhone}/>
 
                 </div>
               </div>

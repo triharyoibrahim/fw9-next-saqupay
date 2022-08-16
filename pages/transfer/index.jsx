@@ -5,8 +5,16 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Menu from "../../components/Menu";
 import { FiSearch} from "react-icons/fi";
+import { useRouter } from "next/router";
 
 function Transfer() {
+  const router = useRouter()
+
+  const handleTransferInput = (e) => {
+    e.preventDefault();
+    router.push("/transfer/transferInput");
+  };
+
   return (
     <>
     <Head><title>Search Receiver</title></Head>
@@ -35,9 +43,9 @@ function Transfer() {
                   />
                 </Form.Group>
               </Form>
-              <div className=" d-flex-column  p-1 my-1">
+              <div className=" d-flex-column  p-1 my-1 zwlink" onClick={handleTransferInput}>
                 
-                  <div className="graphic p-2 d-flex">
+                  <div className="graphic p-2 d-flex ">
                  
                     <div className="d-flex-column justify-content-center ms-3">
                       <p className="">Robert Suhi</p>

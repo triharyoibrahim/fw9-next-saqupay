@@ -5,9 +5,36 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Menu from "../../components/Menu";
 import { FiArrowRight, FiEdit2 } from "react-icons/fi";
+import { useRouter } from "next/router";
 
 
 function Profile() {
+  const router = useRouter()
+
+  const handlePersonalInfo = (e) => {
+    e.preventDefault();
+    router.push("/profile/personalInfo");
+  };  
+  const handleChangePass = (e) => {
+    e.preventDefault();
+    router.push("/profile/changePass");
+  };
+  const handleChangePin = (e) => {
+    e.preventDefault();
+    router.push("/profile/changePin");
+  };
+  const handleLogout = async () => {
+    try {
+      await axios.post("/auth/logout");
+      Cookies.remove("token");
+      Cookies.remove("id");
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  
   return (
     <>
     <Head><title>Profile</title></Head>
@@ -31,7 +58,7 @@ function Profile() {
                 <p className=" mt-4">Robert Chandler</p>
                 <p className="mx-5">+62 813-9387-7946</p>
               </div>
-              <div className="graphic p-3 my-3 mx-auto">
+              <div className="graphic p-3 my-3 mx-auto zwlink" onClick={handlePersonalInfo}>
                 
                   <div className="d-flex justify-content-between ms-3">
                     <p className=" mb-1">Personal Information</p>
@@ -40,7 +67,7 @@ function Profile() {
                   
                 
               </div>
-              <div className="graphic d-flex-column  p-3 my-3 mx-auto">
+              <div className="graphic d-flex-column  p-3 my-3 mx-auto zwlink" onClick={handleChangePass}>
                 
                   <div className="d-flex justify-content-between ms-3">
                     <p className="mb-1">Change Password</p>
@@ -49,7 +76,7 @@ function Profile() {
 
                 
               </div>
-              <div className="graphic  d-flex-column p-3 my-3 mx-auto ">
+              <div className="graphic  d-flex-column p-3 my-3 mx-auto zwlink" onClick={handleChangePin}>
                 
                   <div className="d-flex justify-content-between ms-3">
                     <p className="mb-1">Change PIN</p>
@@ -58,7 +85,7 @@ function Profile() {
 
                 
               </div>
-              <div className="graphic d-flex-column p-3 my-3 mb-5 mx-auto ">
+              <div className="graphic d-flex-column p-3 my-3 mb-5 mx-auto zwlink" onClick={handleLogout}>
                 
                   <div className="d-flex justify-content-between ms-3">
                     <p className=" mb-1">Log Out</p>
@@ -77,4 +104,4 @@ function Profile() {
   )
 }
 
-export default Profile
+export default Profile;

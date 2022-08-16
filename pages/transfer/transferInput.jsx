@@ -5,8 +5,15 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Menu from "../../components/Menu";
 import { FiEdit2} from "react-icons/fi";
+import { useRouter } from "next/router";
 
 function transferInput() {
+  const router = useRouter()
+
+  const handleConfirm = (e) => {
+    e.preventDefault();
+    router.push("/transfer/confirm");
+  };
   return (
     <>
     <Head><title>Input Amount</title></Head>
@@ -49,7 +56,7 @@ function transferInput() {
                   </div>
                 </Form.Group>
                 <Form.Group className="d-flex w-50 m-auto my-3 my-md-5">
-                  <span>
+                  <span className="zwicon">
                     <FiEdit2 />
                   </span>
                   <Form.Control
@@ -64,6 +71,7 @@ function transferInput() {
                       variant="success"
                       className="w-100 my-5"
                       type="submit"
+                      onClick={handleConfirm}
                     >
                       Continue
                     </Button>
